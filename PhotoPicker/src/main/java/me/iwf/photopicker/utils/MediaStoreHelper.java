@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import me.iwf.photopicker.PhotoPicker;
@@ -55,13 +54,15 @@ public class MediaStoreHelper {
       photoDirectoryAll.setName(context.getString(R.string.__picker_all_image));
       photoDirectoryAll.setId("ALL");
 
-      while (data.moveToNext()) {
+      boolean isBeforeFirst = data.isBeforeFirst();
 
+      while (isBeforeFirst ? data.moveToNext() : data.moveToFirst()) {
+        isBeforeFirst = true;
         int imageId  = data.getInt(data.getColumnIndexOrThrow(_ID));
         String bucketId = data.getString(data.getColumnIndexOrThrow(BUCKET_ID));
         String name = data.getString(data.getColumnIndexOrThrow(BUCKET_DISPLAY_NAME));
         String path = data.getString(data.getColumnIndexOrThrow(DATA));
-        long size = data.getInt(data.getColumnIndexOrThrow(SIZE));
+        long size = data.getInt(data.getColumnIdexOrThrow(SIZE));
 
         if (size < 1) continue;
 
