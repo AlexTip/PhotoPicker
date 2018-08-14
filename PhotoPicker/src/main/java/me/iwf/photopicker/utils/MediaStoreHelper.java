@@ -62,7 +62,7 @@ public class MediaStoreHelper {
         String bucketId = data.getString(data.getColumnIndexOrThrow(BUCKET_ID));
         String name = data.getString(data.getColumnIndexOrThrow(BUCKET_DISPLAY_NAME));
         String path = data.getString(data.getColumnIndexOrThrow(DATA));
-        long size = data.getInt(data.getColumnIdexOrThrow(SIZE));
+        long size = data.getInt(data.getColumnIndexOrThrow(SIZE));
 
         if (size < 1) continue;
 
